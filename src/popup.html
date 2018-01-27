@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Timestamp tool</title>
+    <link rel="stylesheet" href="popup.css">
+
+    <script src="lib/md5.js"></script>
+    <script src="popup.js"></script>
+</head>
+
+<body>
+    <div>
+        <button @click="copy">复制选中</button>
+    </div>
+    <ul class="tabs">
+        <li class="tab" index="0" @click="toggleTab">timestamp</li>
+        <li class="tab" index="1" @click="toggleTab">md5</li>
+        <li class="tab" index="2" @click="toggleTab">base64</li>
+        <li class="tab" index="3" @click="toggleTab">URI encode/decode</li>
+        <li class="tab active" index="4" @click="toggleTab">UserAgent</li>
+    </ul>
+    <div class="tab-contents">
+        <div class="tab-content hidden" index="0">
+            <div class="operators">
+                <button class="btn" id="now" @click="now">now</button>
+                <label for="isMilli">
+                    <input type="checkbox" id="isMilli" @change="toggleMilli"> milliseconds
+                </label>
+            </div>
+            <div>
+                <input id="timestamp" class="input" type="text" placeholder="timestamp here" @input="timestampInput" @focus="selectInput">
+            </div>
+            <div class="divider"></div>
+            <div>
+                <input id="date" class="input" type="text" placeholder="date here" @input="dateStringInput" @focus="selectInput">
+            </div>
+        </div>
+        <div class="tab-content hidden" index="1">
+            <textarea class="text" id="md5" autofocus placeholder="text here" @input="runMd5" @focus="selectInput"></textarea>
+            <div class="operators">
+                <select id="md5Time" @change="runMd5">
+                    <option value="1">1次</option>
+                    <option value="2">2次</option>
+                    <option value="3">3次</option>
+                </select>
+            </div>
+            <textarea class="text" id="md5Result" readonly @focus="selectInput"></textarea>
+        </div>
+        <div class="tab-content hidden" index="2">
+            <textarea class="text" id="base64Source" autofocus placeholder="text here" @input="base64Encode" @focus="selectInput"></textarea>
+            <textarea class="text" id="base64Dest" placeholder="base64 here" @input="base64Decode" @focus="selectInput"></textarea>
+        </div>
+        <div class="tab-content hidden" index="3">
+            <textarea class="text" id="uriDecoded" autofocus placeholder="uri be encode" @input="URIEncode"></textarea>
+            <textarea class="text" id="uriEncoded" placeholder="uri encoded" @input="URIDecode"></textarea>
+        </div>
+        <div class="tab-content" index="4">
+            <p class="ua-intro">
+                use mobile scan the qrcode. or open the link
+                <a href="https://qdlee.github.io/user-agent" target="_blank">UserAgent</a>
+            </p>
+            <img src="./ua.png" alt="">
+        </div>
+    </div>
+
+
+</body>
+
+</html>
